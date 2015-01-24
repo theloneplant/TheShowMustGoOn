@@ -1,97 +1,44 @@
-Shader "DoubleSided" {
-
-    Properties {
-
+Shader "UnlitAlpha"
+{
+    Properties
+    {
         _Color ("Main Color", Color) = (1,1,1,1)
-
-        _MainTex ("Base (RGB)", 2D) = "white" {}
-
-        //_BumpMap ("Bump (RGB) Illumin (A)", 2D) = "bump" {}
-
+        _MainTex ("Base (RGB) Trans. (Alpha)", 2D) = "white" { }
     }
 
-    SubShader {     
-
-        //UsePass "Self-Illumin/VertexLit/BASE"
-
-        //UsePass "Bumped Diffuse/PPL"
-
-        
-
-        // Ambient pass
-
-        Pass {
-
-        Name "BASE"
-
-        Tags {"LightMode" = "Always" /* Upgrade NOTE: changed from PixelOrNone to Always */}
-
-        Color [_PPLAmbient]
-
-        SetTexture [_BumpMap] {
-
-            constantColor (.5,.5,.5)
-
-            combine constant lerp (texture) previous
-
-            }
-
-        SetTexture [_MainTex] {
-
-            constantColor [_Color]
-
-            Combine texture * previous DOUBLE, texture*constant
-
-            }
-
-        }
-
-    
-
-    // Vertex lights
-
-    Pass {
-
-        Name "BASE"
-
-        Tags {"LightMode" = "Vertex"}
-
-        Material {
-
-            Diffuse [_Color]
-
-            Emission [_PPLAmbient]
-
-            Shininess [_Shininess]
-
-            Specular [_SpecColor]
-
-            }
-
-        SeparateSpecular On
-
+    Category
+    {   
+        ZWrite On
+        Alphatest Greater 0.5
         Lighting On
-
-        Cull Off
-
-        SetTexture [_BumpMap] {
-
-            constantColor (.5,.5,.5)
-
-            combine constant lerp (texture) previous
-
+        SubShader
+        {
+            Pass
+            {
+            	Cull Off
+                Lighting Off
+                SetTexture [_MainTex]
+                {
+                    constantColor [_Color]
+                    Combine texture * constant, texture * constant 
+                } 
             }
+	        } 
+	    SubShader {
+			Tags { "RenderType" = "Opaque" }
+			CGPROGRAM
+			#pragma surface surf Lambert
 
-        SetTexture [_MainTex] {
+			struct Input {
+				float2 uv_MainTex;
+			};
 
-            Combine texture * previous DOUBLE, texture*primary
+			sampler2D _MainTex;
 
-            }
-
-        }
-
-    } 
-
-    FallBack "Diffuse", 1
-
+			void surf (Input IN, inout SurfaceOutput o) {
+			o.Albedo = tex2D (_MainTex, IN.uv_MainTex).rgb;
+			}
+			ENDCG
+	    }
+    }
 }
