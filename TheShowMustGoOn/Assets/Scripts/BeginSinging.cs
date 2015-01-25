@@ -8,17 +8,23 @@ public class BeginSinging : MonoBehaviour
 	public GameObject[] rafters;
 	public GameObject sparkEmitter;
 	public GameObject[] lights;
+	public GameObject[] permanentFlickerLights;
 	public GameObject deadLight;
+	public GameObject micStand;
 	public Text interactText;
 	public float flickerTime, waitForRafters;
 
 	private float startTime;
-	private bool colliding, started, singing, flickering, raftersFell;
+	private enum SceneState {
+		notStarted, singing, flickering, raftersFell
+	};
+	private SceneState sceneState;
+	private bool colliding, started, permanentFlicker;
 	private Vector3 anchor;
 
 	void Start ()
 	{
-		
+		sceneState = SceneState.notStarted;
 	}
 	
 	void Update ()
@@ -27,7 +33,7 @@ public class BeginSinging : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.F))
 			{
-				singing = true;
+				sceneState = SceneState.singing;
 				started = true;
 				startTime = Time.time;
 				anchor = player.transform.position;
@@ -35,7 +41,7 @@ public class BeginSinging : MonoBehaviour
 			}
 		}
 
-		if (singing)
+		if (sceneState == SceneState.singing)
 		{
 			// Hold player
 			player.transform.position = anchor;
@@ -43,37 +49,30 @@ public class BeginSinging : MonoBehaviour
 			if (Time.time - startTime >= flickerTime)
 			{
 				startTime = Time.time;
-				flickering = true;
-				singing = false;
+				sceneState = SceneState.flickering;
+				permanentFlicker = true;
 
 				deadLight.light.enabled = false;
 				sparkEmitter.particleEmitter.Emit();
 			}
 		}
 
-		if (flickering)
+		if (sceneState == SceneState.flickering)
 		{
 			// Hold player
 			player.transform.position = anchor;
 
+			micStand.rigidbody.isKinematic = false;
+			micStand.rigidbody.useGravity = true;
+			micStand.rigidbody.AddTorque (new Vector3(0, 5, 10));
+
 			// Flicker lights
-			for (int i = 0; i < lights.Length; i++)
-			{
-				if (Random.Range(0, 100) >= 50)
-				{
-					lights[i].light.enabled = false;
-				}
-				else
-				{
-					lights[i].light.enabled = true;
-				}
-			}
+			flickerLights(lights, 50);
 			
 			if (Time.time - startTime >= waitForRafters)
 			{
 				startTime = Time.time;
-				raftersFell = true;
-				flickering = false;
+				sceneState = SceneState.raftersFell;
 
 				// Enable all lights
 				for (int i = 0; i < lights.Length; i++)
@@ -89,7 +88,12 @@ public class BeginSinging : MonoBehaviour
 			}
 		}
 
-		if (raftersFell)
+		if (permanentFlicker)
+		{
+			flickerLights(permanentFlickerLights, 95);
+		}
+
+		if (sceneState == SceneState.raftersFell)
 		{
 
 		}
@@ -99,7 +103,7 @@ public class BeginSinging : MonoBehaviour
 	{
 		if (colliding && !started)
 		{
-			interactText.text = "Press 'F' to sing!";
+			interactText.text = "'F' to sing!";
 		}
 	}
 
@@ -121,6 +125,22 @@ public class BeginSinging : MonoBehaviour
 			Debug.Log("ouch");
 			colliding = false;
 			interactText.text = "";
+		}
+	}
+
+	private void flickerLights (GameObject[] lights, int chanceOfFlicker)
+	{
+		// Flicker lights
+		for (int i = 0; i < lights.Length; i++)
+		{
+			if (Random.Range(0, 100) >= chanceOfFlicker)
+			{
+				lights[i].light.enabled = false;
+			}
+			else
+			{
+				lights[i].light.enabled = true;
+			}
 		}
 	}
 }
