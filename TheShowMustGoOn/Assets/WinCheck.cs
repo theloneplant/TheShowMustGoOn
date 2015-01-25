@@ -11,6 +11,7 @@ public class WinCheck : MonoBehaviour
 	private float startTime;
 	private float timeElapsed;
 	private bool started;
+	private bool win;
 
 	// Use this for initialization
 	void Start ()
@@ -30,12 +31,18 @@ public class WinCheck : MonoBehaviour
 				Debug.Log("winning");
 				winText.enabled = true;
 				winMessage.enabled = true;
+				win = true;
 			}
 			else
 			{
 				float delta = secondsUntilWin - timeElapsed;
 				timer.text = (int) delta / 60 + ":" + (int) delta % 60;
 			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space) && win)
+		{
+			Application.LoadLevel("Main");
 		}
 	}
 
