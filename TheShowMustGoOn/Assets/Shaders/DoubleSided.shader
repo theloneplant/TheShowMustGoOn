@@ -40,5 +40,6 @@ Shader "UnlitAlpha"
 			}
 			ENDCG
 	    }
+	    Fallback "VertexLit"
     }
 }
