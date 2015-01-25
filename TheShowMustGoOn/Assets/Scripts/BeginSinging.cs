@@ -13,6 +13,7 @@ public class BeginSinging : MonoBehaviour
 	public GameObject micStand;
 	public Text interactText;
 	public float flickerTime, waitForRafters;
+	public AudioSource soundEffectsBag;
 
 	private float startTime;
 	private enum SceneState {
@@ -20,11 +21,16 @@ public class BeginSinging : MonoBehaviour
 	};
 	private SceneState sceneState;
 	private bool colliding, started, permanentFlicker;
+	private AudioSource[] sounds;
+	private bool humPlayed;
 	private Vector3 anchor;
 
 	void Start ()
 	{
 		sceneState = SceneState.notStarted;
+		// Grab all of the Audio source components from the sound effects bag
+		sounds = soundEffectsBag.GetComponents<AudioSource> ();
+		humPlayed = false;
 	}
 	
 	void Update ()
@@ -54,6 +60,7 @@ public class BeginSinging : MonoBehaviour
 
 				deadLight.light.enabled = false;
 				sparkEmitter.particleEmitter.Emit();
+				sounds[0].Play ();
 			}
 		}
 
@@ -140,6 +147,11 @@ public class BeginSinging : MonoBehaviour
 			else
 			{
 				lights[i].light.enabled = true;
+				// Limit playing the hum sound to once
+				if (!sounds[1].isPlaying && !humPlayed) {
+					sounds[1].Play();
+					humPlayed = true;
+				}
 			}
 		}
 	}

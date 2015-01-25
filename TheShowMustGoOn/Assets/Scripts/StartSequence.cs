@@ -9,6 +9,7 @@ public class StartSequence : MonoBehaviour
 	             spotLightPause;      // How much time between each spotlight turning on
 	public GameObject topLeftSptLight, botLeftSptLight, topRightSptLight, botRightSptLight, middleSptLight;
 	public AudioSource spotLightOnSound, curtainOpeningSound;
+	public GameObject titleScreenImageUI, startTextUI; 	
 
 	// Makes life easier for scripted events
 	enum IntroSceneState {
@@ -48,6 +49,11 @@ public class StartSequence : MonoBehaviour
 			// The title screen should still be visible
 			if (Input.GetKeyDown("space"))
 			{
+				// Delete the title screen UI
+				Destroy(titleScreenImageUI);
+				Destroy(startTextUI);
+
+				// Open the curtains
 				startTime = Time.time;
 				eventState = IntroSceneState.OPENING_CURTAINS;
 				OpenCurtains();
