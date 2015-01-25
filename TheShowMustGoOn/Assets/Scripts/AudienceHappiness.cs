@@ -5,6 +5,7 @@ using System.Collections;
 public class AudienceHappiness : MonoBehaviour {
 
 	public float happinessMeter; // Between 0.0 and 1.0 #HashtagLerp4Ever
+	public float happyDelta;
 	public float audienceInterval; // How often the audience cheers/boos
 	public float happinessLossOT; // How quickly the audience gets bored of you
 	public Slider happySlider;
@@ -21,28 +22,56 @@ public class AudienceHappiness : MonoBehaviour {
 		lastTime = Time.time;
 		happinessMeter = lastMood = 0.75f;
 		happySlider.value = happinessMeter * 100;
+		happyDelta = lastMood - happinessMeter;
 		sounds = soundEffectsBag.GetComponents<AudioSource> (); // see the gameobject in scene to find sound definitions
 	}
 
 	// Called every (audienceInterval) seconds, computes the change in
 	// the audience's mood from the last time, and then plays a positive
 	// or negative sound accordingly
-	void CheerOrBoo() {
+	private void CheerOrBoo() {
 		if (lastMood > happinessMeter) {
 			// If the audience's happy level went down, play a boo!
-			if (!sounds[4].isPlaying)
-				sounds[4].Play ();
+			if (!IsMakingSound())
+				Boo ();
 			lastMood = happinessMeter;
 			lastTime = Time.time;
 		} else {
 			// Otherwise, play a yay!
-			if (!sounds[3].isPlaying)
-				sounds[3].Play ();
+			if (!IsMakingSound())
+				Cheer ();
 			lastMood = happinessMeter;
 			lastTime = Time.time;
 		}
 	}
-	
+
+	// Returns true if audience is cheering/booing/crying/laughing etc.
+	public bool IsMakingSound() {
+		return (
+			sounds[3].isPlaying || sounds[4].isPlaying
+		);
+	}
+
+	// Stops all the audience sounds immediately (i.e. we just caught a ball or did
+	// a fancy trick or something.)
+	public void StopAllSounds() {
+		foreach (AudioSource s in sounds) {
+			s.Stop ();
+		}
+	}
+
+	public void Cheer() {
+		sounds[3].Play ();
+	}
+
+	public void Boo() {
+		sounds[4].Play ();
+	}
+
+	public void Laugh() {
+		sounds[5].Play ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		happySlider.value = happinessMeter * 100;
@@ -57,11 +86,6 @@ public class AudienceHappiness : MonoBehaviour {
 			happySlider.enabled = true;
 			lastTime = Time.time;
 		}
-
-//		// DEBUG ONLY
-//		if (Input.GetKeyDown (KeyCode.H)) {
-//			happinessMeter = Mathf.Min( happinessMeter + 0.15f, 1.0f );
-//		}
 
 		if ( Time.time - lastTime >= audienceInterval 
 		    && start.eventState == StartSequence.IntroSceneState.DONE ) {
