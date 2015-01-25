@@ -10,6 +10,8 @@ public class StartSequence : MonoBehaviour
 	public GameObject topLeftSptLight, botLeftSptLight, topRightSptLight, botRightSptLight, middleSptLight;
 	public AudioSource spotLightOnSound, curtainOpeningSound;
 	public GameObject titleScreenImageUI, startTextUI; 	
+	public CharacterController player;
+	private Vector3 playerStartPos;
 
 	// Makes life easier for scripted events
 	enum IntroSceneState {
@@ -39,6 +41,9 @@ public class StartSequence : MonoBehaviour
 		botRightSptLight.light.enabled = false;
 		middleSptLight.light.enabled = false;
 		lightsOn = 0;
+
+		// Showing title screen locks player controls
+		playerStartPos = player.transform.position;
 	}
 
 	void Update ()
@@ -58,6 +63,9 @@ public class StartSequence : MonoBehaviour
 				eventState = IntroSceneState.OPENING_CURTAINS;
 				OpenCurtains();
 				Debug.Log("The curtains have opened!");
+			}
+			else {
+				player.transform.position = playerStartPos;
 			}
 			break;
 		case IntroSceneState.OPENING_CURTAINS:
