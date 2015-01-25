@@ -19,6 +19,7 @@ public class BeginSinging : MonoBehaviour
 	public enum SceneState {
 		notStarted, singing, flickering, raftersFell
 	};
+	public AudienceHappiness crowd;
 	public SceneState sceneState;
 
 	private float startTime;
@@ -46,6 +47,9 @@ public class BeginSinging : MonoBehaviour
 				startTime = Time.time;
 				anchor = player.transform.position;
 				interactText.text = "";
+				if (crowd != null) {
+					crowd.happinessMeter += 0.075f;
+				}
 				sounds[2].Play ();
 			}
 
