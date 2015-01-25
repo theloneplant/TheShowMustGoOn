@@ -9,6 +9,7 @@ public class PickupObject : MonoBehaviour
 	public Text interactText;
 	public float offsetAmount;
 
+	private Rigidbody other;
 	private bool colliding, holding;
 
 
@@ -21,17 +22,18 @@ public class PickupObject : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (colliding && Input.GetKey(KeyCode.F))
+		if (colliding && Input.GetKey(KeyCode.F) && other != null)
 		{
 			holding = true;
-			arm.connectedBody = rigidbody;
+			arm.connectedBody = other;
 		}
 
-		if (Input.GetKeyUp(KeyCode.F))
+		if (Input.GetKeyUp(KeyCode.F) && other != null)
 		{
 			holding = false;
 			arm.connectedBody = null;
-			rigidbody.velocity = player.velocity;
+			other.velocity = player.velocity;
+			other = null;
 		}
 	}
 
@@ -46,16 +48,27 @@ public class PickupObject : MonoBehaviour
 	void OnTriggerEnter(Collider other)
 	{
 		Debug.Log(other.tag);
-		if (other.tag == "Player")
+		if (other.tag == "Prop")
 		{
 			colliding = true;
+			this.other = other.gameObject.rigidbody;
+		}
+	}
+
+	void OnTriggerStay(Collider other)
+	{
+		Debug.Log(other.tag);
+		if (other.tag == "Prop")
+		{
+			colliding = true;
+			this.other = other.gameObject.rigidbody;
 		}
 	}
 	
 	void OnTriggerExit (Collider other)
 	{
 		Debug.Log(other.tag);
-		if (other.tag == "Player")
+		if (other.tag == "Prop")
 		{
 			colliding = false;
 			interactText.text = "";
