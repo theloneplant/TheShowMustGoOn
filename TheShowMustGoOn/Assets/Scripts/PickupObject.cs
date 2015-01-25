@@ -9,6 +9,7 @@ public class PickupObject : MonoBehaviour
 	public FixedJoint arm;
 	public Text interactText;
 	public float throwSpeed;
+	public AudienceHappiness crowd;
 
 	private Rigidbody other;
 	private GameObject otherObj;
@@ -27,6 +28,7 @@ public class PickupObject : MonoBehaviour
 		Vector3 direction = transform.position - playerCam.transform.position;
 		other.velocity = player.velocity + direction * throwSpeed;
 		other = null;
+		crowd.happinessMeter += 0.025f;
 	}
 	
 	// Update is called once per frame
