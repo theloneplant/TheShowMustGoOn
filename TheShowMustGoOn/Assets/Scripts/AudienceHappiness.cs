@@ -23,6 +23,7 @@ public class AudienceHappiness : MonoBehaviour {
 	 * 4 - booing
 	 * 5 - laughing
 	 * 6 - awww
+	 * 7 - trumpet noise
 	 */
 
 	private AudioSource[] sounds;
@@ -60,8 +61,16 @@ public class AudienceHappiness : MonoBehaviour {
 	// Returns true if audience is cheering/booing/crying/laughing etc.
 	public bool IsMakingSound() {
 		return (
-			sounds[3].isPlaying || sounds[4].isPlaying
+			sounds[3].isPlaying || sounds[4].isPlaying || sounds[5].isPlaying || sounds[6].isPlaying
 		);
+	}
+
+	public bool IsBooing() {
+		return sounds [4].isPlaying;
+	}
+
+	public void StopBooing() {
+		sounds [4].Stop ();
 	}
 
 	// Stops all the audience sounds immediately (i.e. we just caught a ball or did
