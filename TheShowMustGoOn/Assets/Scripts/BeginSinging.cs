@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BeginSinging : MonoBehaviour
@@ -8,10 +9,11 @@ public class BeginSinging : MonoBehaviour
 	public GameObject sparkEmitter;
 	public GameObject[] lights;
 	public GameObject deadLight;
+	public Text interactText;
 	public float flickerTime, waitForRafters;
 
 	private float startTime;
-	private bool colliding, singing, flickering, raftersFell;
+	private bool colliding, started, singing, flickering, raftersFell;
 	private Vector3 anchor;
 
 	void Start ()
@@ -26,8 +28,10 @@ public class BeginSinging : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.F))
 			{
 				singing = true;
+				started = true;
 				startTime = Time.time;
 				anchor = player.transform.position;
+				interactText.text = "";
 			}
 		}
 
@@ -91,6 +95,14 @@ public class BeginSinging : MonoBehaviour
 		}
 	}
 
+	void OnGUI ()
+	{
+		if (colliding && !started)
+		{
+			interactText.text = "Press 'F' to sing!";
+		}
+	}
+
 	void OnTriggerEnter(Collider other)
 	{
 		Debug.Log(other.tag);
@@ -108,6 +120,7 @@ public class BeginSinging : MonoBehaviour
 		{
 			Debug.Log("ouch");
 			colliding = false;
+			interactText.text = "";
 		}
 	}
 }

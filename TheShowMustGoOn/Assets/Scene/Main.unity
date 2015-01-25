@@ -183,7 +183,7 @@ GameObject:
   - 4: {fileID: 21296418}
   - 108: {fileID: 21296419}
   m_Layer: 0
-  m_Name: Spotlight9
+  m_Name: SpotlightFrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,7 +1296,7 @@ GameObject:
   - 4: {fileID: 170720428}
   - 108: {fileID: 170720429}
   m_Layer: 0
-  m_Name: Spotlight5
+  m_Name: TopRightSpotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1439,6 +1439,72 @@ MeshFilter:
   m_PrefabInternal: {fileID: 983199851}
   m_GameObject: {fileID: 178922789}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &183603917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 183603920}
+  - 222: {fileID: 183603919}
+  - 114: {fileID: 183603918}
+  m_Layer: 5
+  m_Name: InteractText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &183603918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 183603917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &183603919
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 183603917}
+--- !u!224 &183603920
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 183603917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 907961645}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: -120}
+  m_SizeDelta: {x: 200, y: 30}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &184387305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,7 +1683,7 @@ GameObject:
   - 4: {fileID: 217207750}
   - 108: {fileID: 217207749}
   m_Layer: 0
-  m_Name: Spotlight1
+  m_Name: BotLeftSpotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2413,7 +2479,7 @@ GameObject:
   - 4: {fileID: 353862882}
   - 108: {fileID: 353862883}
   m_Layer: 0
-  m_Name: Spotlight8
+  m_Name: SpotlightFrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2703,8 +2769,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 379565585}
   - 108: {fileID: 379565586}
+  - 82: {fileID: 379565587}
   m_Layer: 0
-  m_Name: Spotlight3
+  m_Name: MiddleSpotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2758,6 +2825,64 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!82 &379565587
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 379565584}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: dd5fb5c8528594e6d855a372e062f87c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &382354143
 GameObject:
   m_ObjectHideFlags: 0
@@ -7984,7 +8109,15 @@ MonoBehaviour:
   curtainLeft: {fileID: 1392619478}
   curtainRight: {fileID: 1514974086}
   moveAmount: 14
-  duration: 3
+  curtainOpenDuration: 5
+  spotLightPause: 1
+  topLeftSptLight: {fileID: 1972258143}
+  botLeftSptLight: {fileID: 217207748}
+  topRightSptLight: {fileID: 170720427}
+  botRightSptLight: {fileID: 1247753517}
+  middleSptLight: {fileID: 379565584}
+  spotLightOnSound: {fileID: 379565587}
+  curtainOpeningSound: {fileID: 917385114}
 --- !u!114 &907961642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8048,7 +8181,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 183603920}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
@@ -8064,6 +8198,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 917385113}
+  - 82: {fileID: 917385114}
   m_Layer: 0
   m_Name: Curtains
   m_TagString: Untagged
@@ -8088,6 +8223,64 @@ Transform:
   - {fileID: 1555013887}
   m_Father: {fileID: 2016677301}
   m_RootOrder: 13
+--- !u!82 &917385114
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 917385112}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 91ca0cc26e218479aa32a4a762cf89a1, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &919555895
 GameObject:
   m_ObjectHideFlags: 0
@@ -11015,7 +11208,7 @@ GameObject:
   - 4: {fileID: 1247753518}
   - 108: {fileID: 1247753519}
   m_Layer: 0
-  m_Name: Spotlight2
+  m_Name: BotRightSpotLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11496,7 +11689,7 @@ GameObject:
   - 4: {fileID: 1308012398}
   - 108: {fileID: 1308012399}
   m_Layer: 0
-  m_Name: Spotlight10
+  m_Name: SpotlightFrontCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13177,7 +13370,7 @@ GameObject:
   - 4: {fileID: 1439485140}
   - 108: {fileID: 1439485141}
   m_Layer: 0
-  m_Name: Spotlight7
+  m_Name: SpotlightWallRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16438,7 +16631,7 @@ GameObject:
   - 4: {fileID: 1766880338}
   - 108: {fileID: 1766880339}
   m_Layer: 0
-  m_Name: Spotlight6
+  m_Name: SpotlightWallLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18459,7 +18652,7 @@ GameObject:
   - 4: {fileID: 1972258145}
   - 108: {fileID: 1972258144}
   m_Layer: 0
-  m_Name: Spotlight4
+  m_Name: TopLeftSpotLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18611,6 +18804,7 @@ MonoBehaviour:
   - {fileID: 353862881}
   - {fileID: 21296417}
   deadLight: {fileID: 379565584}
+  interactText: {fileID: 183603918}
   flickerTime: 3
   waitForRafters: 3
 --- !u!136 &1975649435
