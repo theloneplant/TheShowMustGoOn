@@ -13,6 +13,18 @@ public class AudienceHappiness : MonoBehaviour {
 	public GameObject soundEffectsBag; // SFX bag, we meet again!
 	public StartSequence start;
 
+	/**
+	 * AudioSource order on SoundEffectsBag:
+	 * 
+	 * 0 - zap
+	 * 1 - spotlight-flicker
+	 * 2 - throat clearing
+	 * 3 - cheering
+	 * 4 - booing
+	 * 5 - laughing
+	 * 6 - awww
+	 */
+
 	private AudioSource[] sounds;
 	private float lastTime;
 	private float lastMood;
@@ -68,8 +80,13 @@ public class AudienceHappiness : MonoBehaviour {
 		sounds[4].Play ();
 	}
 
+	// A positive response to an action
 	public void Laugh() {
 		sounds[5].Play ();
+	}
+
+	public void Aww() {
+		sounds[6].Play ();
 	}
 
 	// Update is called once per frame
