@@ -22,7 +22,6 @@ public class StartSequence : MonoBehaviour
 		{
 			startTime = Time.time;
 			started = true;
-			Debug.Log("The game started");
 		}
 
 		// If the game has been started, aka space has been pressed
@@ -38,7 +37,6 @@ public class StartSequence : MonoBehaviour
 		Vector3 curtainEnd;
 		float timePercent = Mathf.Clamp((Time.time - startTime) / duration, 0, 1);
 
-		Debug.Log("" + timePercent);
 		if (moveLeft)
 		{
 			curtainEnd = curtainStart + new Vector3 (-moveAmount, 0, 0);

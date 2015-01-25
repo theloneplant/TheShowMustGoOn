@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shaders/DoubleSided.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/BeginSinging.cs">
     <Files>
       <File FileName="Assets/Shaders/DoubleSided.shader" Line="43" Column="26" />
+      <File FileName="Assets/Scripts/StartSequence.cs" Line="50" Column="69" />
+      <File FileName="Assets/BeginSinging.cs" Line="16" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
