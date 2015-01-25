@@ -14,6 +14,7 @@ public class BeginSinging : MonoBehaviour
 	public Text interactText;
 	public float flickerTime, waitForRafters, rafterSpinAmount;
 	public AudioSource soundEffectsBag;
+	public StartSequence introHandle;
 
 	private float startTime;
 	private enum SceneState {
@@ -37,13 +38,14 @@ public class BeginSinging : MonoBehaviour
 	{
 		if (colliding)
 		{
-			if (Input.GetKeyDown(KeyCode.F))
+			if (Input.GetKeyDown(KeyCode.F) && introHandle.eventState == StartSequence.IntroSceneState.DONE)
 			{
 				sceneState = SceneState.singing;
 				started = true;
 				startTime = Time.time;
 				anchor = player.transform.position;
 				interactText.text = "";
+				sounds[2].Play ();
 			}
 		}
 
@@ -115,9 +117,9 @@ public class BeginSinging : MonoBehaviour
 
 	void OnGUI ()
 	{
-		if (colliding && !started)
+		if (colliding && !started && introHandle.eventState == StartSequence.IntroSceneState.DONE )
 		{
-			interactText.text = "'F' to sing!";
+			interactText.text = "'F' to clear throat!";
 		}
 	}
 

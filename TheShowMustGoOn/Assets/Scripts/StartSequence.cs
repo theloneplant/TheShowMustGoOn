@@ -13,16 +13,17 @@ public class StartSequence : MonoBehaviour
 	public CharacterController player;
 
 	// Makes life easier for scripted events
-	enum IntroSceneState {
+	public enum IntroSceneState {
 		SHOWING_TITLE_SCREEN,
 		OPENING_CURTAINS,
-		SWITCHING_ON_SPOTLIGHTS
+		SWITCHING_ON_SPOTLIGHTS,
+		DONE
 	};
 
 	private Vector3 curtainLeftStart, curtainRightStart;
 	private float startTime;
 	private int lightsOn = 0;
-	private IntroSceneState eventState;
+	public IntroSceneState eventState;
 
 	void Start ()
 	{
@@ -44,6 +45,11 @@ public class StartSequence : MonoBehaviour
 
 	void Update ()
 	{
+
+		if (lightsOn >= 5) {
+			// All spotlights are on, then the intro is over
+			eventState = IntroSceneState.DONE;
+		}
 
 		switch (eventState) {
 		case IntroSceneState.SHOWING_TITLE_SCREEN:
