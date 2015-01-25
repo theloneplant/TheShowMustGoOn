@@ -15,6 +15,7 @@ public class BeginSinging : MonoBehaviour
 	public float flickerTime, waitForRafters, rafterSpinAmount;
 	public AudioSource soundEffectsBag;
 	public StartSequence introHandle;
+	public AudienceHappiness crowd;
 
 	private float startTime;
 	private enum SceneState {
@@ -45,6 +46,9 @@ public class BeginSinging : MonoBehaviour
 				startTime = Time.time;
 				anchor = player.transform.position;
 				interactText.text = "";
+				if (crowd != null) {
+					crowd.happinessMeter += 0.075f;
+				}
 				sounds[2].Play ();
 			}
 

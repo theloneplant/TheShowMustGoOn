@@ -32,7 +32,7 @@ public class TrumpetPropEvent : EventPropEvent {
 		if ( eventFinished ) {
 			eventFinished = false;
 			eventsPerformed++;
-			if ( eventsPerformed >= effectivenessThreshold ) {
+			if ( eventsPerformed > effectivenessThreshold ) {
 				// Not effective any more, don't play the trumpet sound!
 				audience.happinessMeter -= 0.05f;
 				audience.Aww (); // The audience is displeased
