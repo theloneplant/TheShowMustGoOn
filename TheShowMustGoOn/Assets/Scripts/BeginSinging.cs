@@ -111,15 +111,21 @@ public class BeginSinging : MonoBehaviour
 
 		if (sceneState == SceneState.raftersFell)
 		{
-
+			tag = "Prop"; // Once the rafters have fallen, the mic stand becomes a prop
+			foreach (CapsuleCollider c in GetComponents<CapsuleCollider>()) {
+				if ( c.isTrigger ) {
+					c.enabled = false;
+				}
+			}
 		}
 	}
 
 	void OnGUI ()
 	{
-		if (colliding && !started && introHandle.eventState == StartSequence.IntroSceneState.DONE )
-		{
+		if (colliding && !started && introHandle.eventState == StartSequence.IntroSceneState.DONE) {
 			interactText.text = "'F' to clear throat!";
+		} else if (colliding && introHandle.eventState == StartSequence.IntroSceneState.DONE && tag.Equals ("Prop")) {
+			interactText.text = "'F' to use!";
 		}
 	}
 
