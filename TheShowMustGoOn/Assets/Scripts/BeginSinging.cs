@@ -11,14 +11,17 @@ public class BeginSinging : MonoBehaviour
 	public GameObject deadLight;
 	public Text interactText;
 	public float flickerTime, waitForRafters;
+	public AudioSource soundEffectsBag;
 
 	private float startTime;
+	private AudioSource[] sounds;
 	private bool colliding, started, singing, flickering, raftersFell;
 	private Vector3 anchor;
 
 	void Start ()
 	{
-		
+		// Grab all of the Audio source components from the sound effects bag
+		sounds = soundEffectsBag.GetComponents<AudioSource> ();
 	}
 	
 	void Update ()
@@ -48,6 +51,7 @@ public class BeginSinging : MonoBehaviour
 
 				deadLight.light.enabled = false;
 				sparkEmitter.particleEmitter.Emit();
+				sounds[0].Play ();
 			}
 		}
 
@@ -66,6 +70,9 @@ public class BeginSinging : MonoBehaviour
 				else
 				{
 					lights[i].light.enabled = true;
+					if (!sounds[1].isPlaying) {
+						sounds[1].Play();
+					}
 				}
 			}
 			
