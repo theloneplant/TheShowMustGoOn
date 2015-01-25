@@ -15,6 +15,7 @@ public class BeginSinging : MonoBehaviour
 
 	private float startTime;
 	private AudioSource[] sounds;
+	private bool humPlayed;
 	private bool colliding, started, singing, flickering, raftersFell;
 	private Vector3 anchor;
 
@@ -22,6 +23,7 @@ public class BeginSinging : MonoBehaviour
 	{
 		// Grab all of the Audio source components from the sound effects bag
 		sounds = soundEffectsBag.GetComponents<AudioSource> ();
+		humPlayed = false;
 	}
 	
 	void Update ()
@@ -70,8 +72,10 @@ public class BeginSinging : MonoBehaviour
 				else
 				{
 					lights[i].light.enabled = true;
-					if (!sounds[1].isPlaying) {
+					// Limit playing the hum sound to once
+					if (!sounds[1].isPlaying && !humPlayed) {
 						sounds[1].Play();
+						humPlayed = true;
 					}
 				}
 			}
