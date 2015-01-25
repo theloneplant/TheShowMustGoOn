@@ -47,6 +47,11 @@ public class BeginSinging : MonoBehaviour
 				interactText.text = "";
 				sounds[2].Play ();
 			}
+
+			if ( introHandle.eventState == StartSequence.IntroSceneState.SWITCHING_ON_SPOTLIGHTS ||
+			     introHandle.eventState == StartSequence.IntroSceneState.OPENING_CURTAINS ) {
+				interactText.text = "Wait for your cue!";
+			}
 		}
 
 		if (sceneState == SceneState.singing)

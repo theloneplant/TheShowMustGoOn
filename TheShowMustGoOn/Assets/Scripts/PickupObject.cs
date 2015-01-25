@@ -11,6 +11,7 @@ public class PickupObject : MonoBehaviour
 	public float throwSpeed;
 
 	private Rigidbody other;
+	private GameObject otherObj;
 	private bool colliding, holding;
 
 
@@ -18,6 +19,14 @@ public class PickupObject : MonoBehaviour
 	void Start ()
 	{
 	
+	}
+
+	void Throw() {
+		holding = false;
+		arm.connectedBody = null;
+		Vector3 direction = transform.position - playerCam.transform.position;
+		other.velocity = player.velocity + direction * throwSpeed;
+		other = null;
 	}
 	
 	// Update is called once per frame
@@ -27,16 +36,26 @@ public class PickupObject : MonoBehaviour
 		{
 			if (holding)
 			{
-				holding = false;
-				arm.connectedBody = null;
-				Vector3 direction = transform.position - playerCam.transform.position;
-				other.velocity = player.velocity + direction * throwSpeed;
-				other = null;
+				if ( otherObj.tag == "EventProp" ) {
+					if ( otherObj.GetComponent<EventPropEvent>().IsThrowable() ) {
+						otherObj.GetComponent<EventPropEvent>().held = false;
+						Throw();
+					}
+				}
+				else {
+					Throw ();
+				}
 			}
 			else if (colliding)
 			{
 				holding = true;
 				arm.connectedBody = other;
+				if ( otherObj.tag == "EventProp" ) {
+					EventPropEvent e = other.gameObject.GetComponent<EventPropEvent>();
+					if ( e != null ) {
+						e.TriggerEvent();
+					}
+				}
 			}
 		}
 	}
@@ -51,29 +70,37 @@ public class PickupObject : MonoBehaviour
 	
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log(other.tag);
 		if (other.tag == "Prop")
 		{
 			colliding = true;
 			this.other = other.gameObject.rigidbody;
+			otherObj = other.gameObject;
+		}
+		else if (other.tag == "EventProp") {
+			// trigger the event on the event prop object
+			colliding = true;
+			otherObj = other.gameObject;
 		}
 	}
 
 	void OnTriggerStay(Collider other)
 	{
-		Debug.Log(other.tag);
-		if (other.tag == "Prop")
+		if (other.tag == "Prop" || other.tag == "EventProp")
 		{
 			colliding = true;
 			this.other = other.gameObject.rigidbody;
+			otherObj = other.gameObject;
 		}
 	}
 	
 	void OnTriggerExit (Collider other)
 	{
-		Debug.Log(other.tag);
 		if (other.tag == "Prop")
 		{
+			colliding = false;
+			interactText.text = "";
+		}
+		else if (other.tag == "EventProp") {
 			colliding = false;
 			interactText.text = "";
 		}
