@@ -15,12 +15,13 @@ public class BeginSinging : MonoBehaviour
 	public float flickerTime, waitForRafters, rafterSpinAmount;
 	public AudioSource soundEffectsBag;
 	public StartSequence introHandle;
-
-	private float startTime;
-	private enum SceneState {
+	public WinCheck winCheck;
+	public enum SceneState {
 		notStarted, singing, flickering, raftersFell
 	};
-	private SceneState sceneState;
+	public SceneState sceneState;
+
+	private float startTime;
 	private bool colliding, started, permanentFlicker;
 	private AudioSource[] sounds;
 	private bool humPlayed;
@@ -106,6 +107,8 @@ public class BeginSinging : MonoBehaviour
 					rafters[i].rigidbody.AddForce(x, y, z);
 					Debug.Log(x + " " + y + " " + z);
 				}
+
+				winCheck.startTimer();
 			}
 		}
 
