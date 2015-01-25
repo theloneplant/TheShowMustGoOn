@@ -34,8 +34,8 @@ public class ThrowTrash : MonoBehaviour
 				Vector3 throwPos = new Vector3(x, y, z);
 				Vector3 delta = aimObject.transform.position - throwPos;
 
-				GameObject newTrash = Instantiate (trash[Random.Range(0, trash.Length - 1)], throwPos, Vector3.zero);
-				newTrash.rigidbody.velocity = delta;
+				//GameObject newTrash = Instantiate (trash[Random.Range(0, trash.Length - 1)], throwPos, Vector3.zero);
+				//newTrash.rigidbody.velocity = delta;
 			}
 		}
 	}

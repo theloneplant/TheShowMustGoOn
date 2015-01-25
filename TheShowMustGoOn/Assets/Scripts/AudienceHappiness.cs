@@ -11,6 +11,8 @@ public class AudienceHappiness : MonoBehaviour {
 	public Slider happySlider;
 	public Collider audienceCollider; // Useful to handle audience reaction to thrown items
 	public GameObject soundEffectsBag; // SFX bag, we meet again!
+	public GameObject gameOverScreen;
+	public CharacterController player;
 	public StartSequence start;
 
 	/**
@@ -32,9 +34,10 @@ public class AudienceHappiness : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameOverScreen.renderer.enabled = false;
 		lastTime = Time.time;
 		happinessMeter = lastMood = 0.75f;
-		happySlider.value = happinessMeter * 100;
+		happySlider.value = Mathf.FloorToInt( happinessMeter * 100 );
 		happyDelta = lastMood - happinessMeter;
 		sounds = soundEffectsBag.GetComponents<AudioSource> (); // see the gameobject in scene to find sound definitions
 	}
@@ -100,7 +103,7 @@ public class AudienceHappiness : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		happySlider.value = happinessMeter * 100;
+		happySlider.value = Mathf.FloorToInt( happinessMeter * 100 );
 
 		// If the game has started, and the intro is over, passively decrease the audience's happiness
 		if (start.eventState == StartSequence.IntroSceneState.DONE) {
@@ -118,6 +121,11 @@ public class AudienceHappiness : MonoBehaviour {
 			// It is time to decide how you've fared with the audience
 			CheerOrBoo();
 			lastTime = Time.time;
+		}
+
+		if ( happinessMeter <= 0 ) {
+			player.enabled = false;
+			gameOverScreen.renderer.enabled = true;
 		}
 	}
 }

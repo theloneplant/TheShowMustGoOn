@@ -33,11 +33,11 @@ public class TrumpetPropEvent : EventPropEvent {
 			eventFinished = false;
 			eventsPerformed++;
 			if ( eventsPerformed >= effectivenessThreshold ) {
-				// Not effective any more, don't play a sound!
-				audience.happinessMeter -= 0.1f;
-				audience.Aww ();
+				// Not effective any more, don't play the trumpet sound!
+				audience.happinessMeter -= 0.05f;
+				audience.Aww (); // The audience is displeased
 				eventFinished = true;
-				Debug.Log ("trumpt no longer effective");
+				Debug.Log ("trumpet no longer effective");
 			}
 			else {
 				if ( audience.IsBooing() ) {
