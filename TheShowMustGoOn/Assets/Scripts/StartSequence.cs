@@ -11,7 +11,6 @@ public class StartSequence : MonoBehaviour
 	public AudioSource spotLightOnSound, curtainOpeningSound;
 	public GameObject titleScreenImageUI, startTextUI; 	
 	public CharacterController player;
-	private Vector3 playerStartPos;
 
 	// Makes life easier for scripted events
 	enum IntroSceneState {
@@ -41,9 +40,6 @@ public class StartSequence : MonoBehaviour
 		botRightSptLight.light.enabled = false;
 		middleSptLight.light.enabled = false;
 		lightsOn = 0;
-
-		// Showing title screen locks player controls
-		playerStartPos = player.transform.position;
 	}
 
 	void Update ()
@@ -54,6 +50,9 @@ public class StartSequence : MonoBehaviour
 			// The title screen should still be visible
 			if (Input.GetKeyDown("space"))
 			{
+				// Enable the character controller
+				player.enabled = true;
+
 				// Delete the title screen UI
 				Destroy(titleScreenImageUI);
 				Destroy(startTextUI);
@@ -65,7 +64,7 @@ public class StartSequence : MonoBehaviour
 				Debug.Log("The curtains have opened!");
 			}
 			else {
-				player.transform.position = playerStartPos;
+				player.enabled = false;
 			}
 			break;
 		case IntroSceneState.OPENING_CURTAINS:

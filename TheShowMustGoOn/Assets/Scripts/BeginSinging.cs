@@ -97,7 +97,7 @@ public class BeginSinging : MonoBehaviour
 
 		if (permanentFlicker)
 		{
-			flickerLights(permanentFlickerLights, 95);
+			flickerLights(permanentFlickerLights, 97);
 		}
 
 		if (sceneState == SceneState.raftersFell)

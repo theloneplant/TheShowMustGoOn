@@ -5,9 +5,10 @@ using System.Collections;
 public class PickupObject : MonoBehaviour
 {
 	public CharacterController player;
+	public Camera playerCam;
 	public FixedJoint arm;
 	public Text interactText;
-	public float offsetAmount;
+	public float throwSpeed;
 
 	private Rigidbody other;
 	private bool colliding, holding;
@@ -22,18 +23,21 @@ public class PickupObject : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (colliding && Input.GetKey(KeyCode.F) && other != null)
+		if (Input.GetKeyDown(KeyCode.F) && other != null)
 		{
-			holding = true;
-			arm.connectedBody = other;
-		}
-
-		if (Input.GetKeyUp(KeyCode.F) && other != null)
-		{
-			holding = false;
-			arm.connectedBody = null;
-			other.velocity = player.velocity;
-			other = null;
+			if (holding)
+			{
+				holding = false;
+				arm.connectedBody = null;
+				Vector3 direction = transform.position - playerCam.transform.position;
+				other.velocity = player.velocity + direction * throwSpeed;
+				other = null;
+			}
+			else if (colliding)
+			{
+				holding = true;
+				arm.connectedBody = other;
+			}
 		}
 	}
 
