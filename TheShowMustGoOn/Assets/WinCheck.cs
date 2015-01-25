@@ -27,6 +27,7 @@ public class WinCheck : MonoBehaviour
 
 			if (timeElapsed > secondsUntilWin)
 			{
+				Debug.Log("winning");
 				winText.enabled = true;
 				winMessage.enabled = true;
 			}

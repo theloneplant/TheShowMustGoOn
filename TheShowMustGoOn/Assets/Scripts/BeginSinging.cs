@@ -11,6 +11,7 @@ public class BeginSinging : MonoBehaviour
 	public GameObject[] permanentFlickerLights;
 	public GameObject deadLight;
 	public GameObject micStand;
+	public GameObject rafterShelf;
 	public Text interactText;
 	public float flickerTime, waitForRafters, rafterSpinAmount;
 	public AudioSource soundEffectsBag;
@@ -112,6 +113,7 @@ public class BeginSinging : MonoBehaviour
 					Debug.Log(x + " " + y + " " + z);
 				}
 
+				rafterShelf.collider.enabled = false;
 				winCheck.startTimer();
 			}
 		}
