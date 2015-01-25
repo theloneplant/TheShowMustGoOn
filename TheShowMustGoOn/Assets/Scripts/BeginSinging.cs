@@ -14,6 +14,7 @@ public class BeginSinging : MonoBehaviour
 	public Text interactText;
 	public float flickerTime, waitForRafters, rafterSpinAmount;
 	public AudioSource soundEffectsBag;
+	public StartSequence introHandle;
 
 	private float startTime;
 	private enum SceneState {
@@ -37,13 +38,14 @@ public class BeginSinging : MonoBehaviour
 	{
 		if (colliding)
 		{
-			if (Input.GetKeyDown(KeyCode.F))
+			if (Input.GetKeyDown(KeyCode.F) && introHandle.eventState == StartSequence.IntroSceneState.DONE)
 			{
 				sceneState = SceneState.singing;
 				started = true;
 				startTime = Time.time;
 				anchor = player.transform.position;
 				interactText.text = "";
+				sounds[2].Play ();
 			}
 		}
 
@@ -109,15 +111,21 @@ public class BeginSinging : MonoBehaviour
 
 		if (sceneState == SceneState.raftersFell)
 		{
-
+			tag = "Prop"; // Once the rafters have fallen, the mic stand becomes a prop
+			foreach (CapsuleCollider c in GetComponents<CapsuleCollider>()) {
+				if ( c.isTrigger ) {
+					c.enabled = false;
+				}
+			}
 		}
 	}
 
 	void OnGUI ()
 	{
-		if (colliding && !started)
-		{
-			interactText.text = "'F' to sing!";
+		if (colliding && !started && introHandle.eventState == StartSequence.IntroSceneState.DONE) {
+			interactText.text = "'F' to clear throat!";
+		} else if (colliding && introHandle.eventState == StartSequence.IntroSceneState.DONE && tag.Equals ("Prop")) {
+			interactText.text = "'F' to use!";
 		}
 	}
 
