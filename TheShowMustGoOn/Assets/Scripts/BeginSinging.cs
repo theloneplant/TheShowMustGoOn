@@ -12,7 +12,7 @@ public class BeginSinging : MonoBehaviour
 	public GameObject deadLight;
 	public GameObject micStand;
 	public Text interactText;
-	public float flickerTime, waitForRafters;
+	public float flickerTime, waitForRafters, rafterSpinAmount;
 	public AudioSource soundEffectsBag;
 
 	private float startTime;
@@ -87,10 +87,17 @@ public class BeginSinging : MonoBehaviour
 					lights[i].light.enabled = true;
 				}
 
+				// Make rafters fall
 				for (int i = 0; i < rafters.Length; i++)
 				{
 					rafters[i].rigidbody.isKinematic = false;
 					rafters[i].rigidbody.useGravity = true;
+					float x = Random.Range(-rafterSpinAmount, rafterSpinAmount);
+					float y = Random.Range(-rafterSpinAmount, rafterSpinAmount);
+					float z = Random.Range(-rafterSpinAmount, rafterSpinAmount);
+					rafters[i].rigidbody.AddTorque(x, y, z);
+					rafters[i].rigidbody.AddForce(x, y, z);
+					Debug.Log(x + " " + y + " " + z);
 				}
 			}
 		}

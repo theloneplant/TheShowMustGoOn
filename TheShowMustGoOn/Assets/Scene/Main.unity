@@ -8414,7 +8414,7 @@ GameObject:
   - 54: {fileID: 826985790}
   - 138: {fileID: 826985789}
   - 114: {fileID: 826985791}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8430,7 +8430,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .300000012
+  m_Radius: .0500000007
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -21881,6 +21881,7 @@ MonoBehaviour:
   interactText: {fileID: 183603918}
   flickerTime: 2
   waitForRafters: 3
+  rafterSpinAmount: 20
   soundEffectsBag: {fileID: 1792123753}
 --- !u!136 &1975649435
 CapsuleCollider:

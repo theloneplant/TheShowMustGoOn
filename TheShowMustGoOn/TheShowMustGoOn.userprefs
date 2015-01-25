@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PickupObject.cs">
     <Files>
-      <File FileName="Assets/Scripts/StartSequence.cs" Line="16" Column="20" />
-      <File FileName="Assets/Scripts/BeginSinging.cs" Line="106" Column="28" />
-      <File FileName="Assets/Scripts/PickupObject.cs" Line="7" Column="28" />
+      <File FileName="Assets/Scripts/StartSequence.cs" Line="68" Column="5" />
+      <File FileName="Assets/Scripts/BeginSinging.cs" Line="100" Column="44" />
+      <File FileName="Assets/Scripts/PickupObject.cs" Line="10" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
